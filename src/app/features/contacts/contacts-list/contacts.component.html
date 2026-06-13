@@ -1,0 +1,64 @@
+<div class="contacts-page">
+  <div class="page-header">
+    <div>
+      <h1>Contacts</h1>
+      <p>{{ contactData?.meta?.total ?? 0 }} contact(s) au total</p>
+    </div>
+    <button class="btn-primary" routerLink="/contacts/new">+ Nouveau contact</button>
+  </div>
+
+  @if (errorMessage) {
+    <div class="error-banner">{{ errorMessage }}</div>
+  }
+
+  <div class="filters">
+    <select id="selectedCompanyId" (change)="onCompanyFilter($any($event.target).value)">
+      <option value="">— Toutes les entreprises —</option>
+      @for (company of companiesData?.data; track company.id) {
+        <option [value]="company.id">{{ company.name }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Prénom</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Poste</th>
+          <th>Entreprise</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (contact of contactData?.data; track contact.id) {
+          <tr>
+            <td class="cell-name">{{ contact.firstName }}</td>
+            <td>{{ contact.lastName }}</td>
+            <td class="cell-muted">{{ contact.email }}</td>
+            <td class="cell-muted">{{ contact.position ?? '—' }}</td>
+            <td class="cell-muted">{{ contact.company.name }}</td>
+            <td class="cell-actions">
+              <button class="btn-edit" [routerLink]="['/contacts', contact.id, 'edit']">
+                Modifier
+              </button>
+              <button class="btn-delete" (click)="onDelete(contact.id)">Supprimer</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty-state">Aucun contact trouvé</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (contactData?.meta) {
+    <div class="pagination">
+      <span>Page {{ contactData!.meta.page }} / {{ contactData!.meta.lastPage }}</span>
+    </div>
+  }
+</div>

@@ -1,0 +1,88 @@
+<div class="form-page">
+  <div class="page-header">
+    <div>
+      <h1>{{ opportunityId ? 'Modifier l\'opportunité' : 'Nouvelle opportunité' }}</h1>
+      <p>{{ opportunityId ? 'Modifiez les informations de l\'opportunité' : 'Remplissez les informations pour créer une opportunité' }}</p>
+    </div>
+    <button class="btn-secondary" routerLink="/opportunities">Annuler</button>
+  </div>
+
+  <div class="form-card">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="form-grid">
+
+        <div class="form-group full-width">
+          <label for="title">Titre <span class="required">*</span></label>
+          <input eid="title" formControlName="title" type="text" placeholder="ex: Contrat SaaS entreprise X" />
+          @if (form.get('title')?.invalid && form.get('title')?.touched) {
+            <span class="field-error">Champ requis</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Montant (€) <span class="required">*</span></label>
+          <input id="amount" formControlName="amount" type="number" placeholder="5000" min="0" />
+          @if (form.get('amount')?.invalid && form.get('amount')?.touched) {
+            <span class="field-error">Champ requis</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="closeDate">Date de clôture <span class="required">*</span></label>
+          <input id="closeDate" formControlName="closeDate" type="date" />
+          @if (form.get('closeDate')?.invalid && form.get('closeDate')?.touched) {
+            <span class="field-error">Champ requis</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="status">Statut <span class="required">*</span></label>
+          <select id="status" formControlName="status">
+            <option value="">— Sélectionner un statut —</option>
+            @for (s of statusOptions; track s) {
+              <option [value]="s">{{ s }}</option>
+            }
+          </select>
+          @if (form.get('status')?.invalid && form.get('status')?.touched) {
+            <span class="field-error">Veuillez sélectionner un statut</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="companyId">Entreprise <span class="required">*</span></label>
+          <select id="companyId" formControlName="companyId">
+            <option value="">— Choisir une entreprise —</option>
+            @for (company of companiesData?.data; track company.id) {
+              <option [value]="company.id">{{ company.name }}</option>
+            }
+          </select>
+          @if (form.get('companyId')?.invalid && form.get('companyId')?.touched) {
+            <span class="field-error">Veuillez sélectionner une entreprise</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="contactId">Contact <span class="required">*</span></label>
+          <select id="contactId" formControlName="contactId">
+            <option value="">— Choisir un contact —</option>
+            @for (contact of contactsData?.data; track contact.id) {
+              <option [value]="contact.id">{{ contact.firstName }} {{ contact.lastName }}</option>
+            }
+          </select>
+          @if (form.get('contactId')?.invalid && form.get('contactId')?.touched) {
+            <span class="field-error">Veuillez sélectionner un contact</span>
+          }
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" [disabled]="form.invalid">
+          {{ opportunityId ? 'Mettre à jour' : 'Créer l\'opportunité' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

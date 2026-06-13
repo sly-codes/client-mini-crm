@@ -1,0 +1,55 @@
+<div class="companies-page">
+  <div class="page-header">
+    <div>
+      <h1>Entreprises</h1>
+      <p>{{ companiesData?.meta?.total ?? 0 }} entreprise(s) au total</p>
+    </div>
+    <button class="btn-primary" routerLink="/companies/new">+ Nouvelle entreprise</button>
+  </div>
+
+  @if (errorMessage) {
+    <div class="error-banner">{{ errorMessage }}</div>
+  }
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Activité</th>
+          <th>Localisation</th>
+          <th>NCC</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (company of companiesData?.data; track company.id) {
+          <tr>
+            <td class="cell-name">{{ company.name }}</td>
+            <td class="cell-muted">{{ company.email }}</td>
+            <td>{{ company.activity }}</td>
+            <td class="cell-muted">{{ company.location ?? '—' }}</td>
+            <td class="cell-muted">{{ company.ncc }}</td>
+            <td class="cell-actions">
+              <button class="btn-edit" [routerLink]="['/companies', company.id, 'edit']">
+                Modifier
+              </button>
+              <button class="btn-delete" (click)="onDelete(company.id)">Supprimer</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty-state">Aucune entreprise trouvée</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (companiesData?.meta) {
+    <div class="pagination">
+      <span>Page {{ companiesData!.meta.page }} / {{ companiesData!.meta.lastPage }}</span>
+    </div>
+  }
+</div>

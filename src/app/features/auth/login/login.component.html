@@ -1,0 +1,55 @@
+<div class="login-wrapper">
+  @if (errorMessage) {
+    <div class="error-banner">
+      {{ errorMessage }}
+    </div>
+  }
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="brand-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="8" fill="#d97706" />
+          <path d="M8 14h12M14 8v12" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+      </div>
+      <span class="brand-name">Mini CRM</span>
+    </div>
+
+    <div class="login-header">
+      <h1>Bon retour</h1>
+      <p>Connectez-vous pour accéder à votre espace</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Adresse email</label>
+        <input
+          id="email"
+          formControlName="email"
+          type="email"
+          placeholder="vous@exemple.com"
+          autocomplete="email"
+        />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class="field-error">Veuillez saisir un email valide</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input
+          id="password"
+          formControlName="password"
+          type="password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+        />
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <span class="field-error">Minimum 8 caractères requis</span>
+        }
+      </div>
+
+      <button type="submit" [disabled]="form.invalid" [class.loading]="false">Se connecter</button>
+    </form>
+  </div>
+</div>
