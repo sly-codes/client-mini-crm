@@ -1,0 +1,68 @@
+<div class="tasks-page">
+  <div class="page-header">
+    <div>
+      <h1>Tâches</h1>
+      <p>{{ tasksData?.meta?.total ?? 0 }} tâche(s) au total</p>
+    </div>
+    <button class="btn-primary" routerLink="/tasks/new">+ Nouvelle tâche</button>
+  </div>
+
+  @if (errorMessage) {
+    <div class="error-banner">{{ errorMessage }}</div>
+  }
+
+  <div class="filters">
+    <select (change)="onStatusFilter($any($event.target).value)">
+      <option value="">— Tous les statuts —</option>
+      @for (status of statusOptions; track status) {
+        <option [value]="status">{{ status }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Description</th>
+          <th>Statut</th>
+          <th>Contact</th>
+          <th>Opportunité</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (task of tasksData?.data; track task.id) {
+          <tr>
+            <td class="cell-name">{{ task.title }}</td>
+            <td class="cell-muted">{{ task.description ?? '—' }}</td>
+            <td>
+              <span [class]="'badge badge--' + task.status.toLowerCase()">
+                {{ task.status }}
+              </span>
+            </td>
+            <td class="cell-muted">
+              {{ task.contact ? task.contact.firstName + ' ' + task.contact.lastName : '—' }}
+            </td>
+            <td class="cell-muted">{{ task.opportunity?.title ?? '—' }}</td>
+            <td class="cell-actions">
+              <button class="btn-edit" [routerLink]="['/tasks', task.id, 'edit']">Modifier</button>
+              <button class="btn-delete" (click)="onDelete(task.id)">Supprimer</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty-state">Aucune tâche trouvée</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (tasksData?.meta) {
+    <div class="pagination">
+      <span>Page {{ tasksData!.meta.page }} / {{ tasksData!.meta.lastPage }}</span>
+    </div>
+  }
+</div>

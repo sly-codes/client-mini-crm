@@ -1,23 +1,20 @@
 import { Routes } from '@angular/router';
-import { App } from './app';
 import { authGuard } from './core/guards/auth.guard';
 import { LoginComponent } from './features/auth/login/login.component';
 import { CompaniesListComponent } from './features/companies/companies-list/companies-list.component';
 import { CompanyFormComponent } from './features/companies/company-form/company-form.component';
 import { ContactsFormComponent } from './features/contacts/contacts-form/contacts-form.component';
 import { ContactsListComponent } from './features/contacts/contacts-list/contacts.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { OpportunitiesFormComponent } from './features/opportunities/opportunities-form/opportunities-form.component';
 import { OpportunitiesListComponent } from './features/opportunities/opportunities-list/opportunities-list.component';
+import { TasksFormComponent } from './features/tasks/tasks-form/tasks-form.component';
+import { TasksListComponent } from './features/tasks/tasks-list/tasks-list.component';
 
 export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-  },
-  {
-    path: 'dashboard',
-    component: App,
-    canActivate: [authGuard],
   },
   {
     path: 'companies',
@@ -62,6 +59,27 @@ export const routes: Routes = [
   {
     path: 'opportunities/:id/edit',
     component: OpportunitiesFormComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'tasks',
+    component: TasksListComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'tasks/new',
+    component: TasksFormComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'tasks/:id/edit',
+    component: TasksFormComponent,
+    canActivate: [authGuard],
+  },
+
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
     canActivate: [authGuard],
   },
 ];

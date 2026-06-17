@@ -28,7 +28,7 @@ export class LoginComponent {
       next: (response) => {
         localStorage.setItem('access_token', response.access_token);
 
-        this.router.navigate(['/companies']);
+        this.router.navigate(['/dashboard']);
         console.log('log In');
       },
       error: (err) => {

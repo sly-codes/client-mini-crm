@@ -9,7 +9,7 @@ import {
 
 @Component({
   selector: 'app-opportunities-list',
-  imports: [RouterLink, DatePipe, DecimalPipe, CurrencyPipe],
+  imports: [RouterLink, DatePipe, DecimalPipe],
   templateUrl: './opportunities-list.component.html',
   styleUrl: './opportunities-list.component.scss',
 })

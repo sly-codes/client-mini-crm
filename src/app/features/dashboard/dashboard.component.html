@@ -1,0 +1,52 @@
+<div class="dashboard-page">
+  <div class="page-header">
+    <h1>Tableau de bord</h1>
+    <p>Vue d'ensemble de votre CRM</p>
+  </div>
+
+  @if (errorMessage) {
+    <div class="error-banner">{{ errorMessage }}</div>
+  }
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <i class="ri-building-fill icon--blue"></i>
+      <div class="stat-body">
+        <span class="stat-label">Entreprises</span>
+        <span class="stat-value">{{ statsData?.companies ?? '—' }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <i class="ri-user-fill icon--purple"></i>
+      <div class="stat-body">
+        <span class="stat-label">Contacts</span>
+        <span class="stat-value">{{ statsData?.contacts ?? '—' }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <i class="ri-bar-chart-fill icon--amber"></i>
+      <div class="stat-body">
+        <span class="stat-label">Opportunités</span>
+        <span class="stat-value">{{ statsData?.opportunities ?? '—' }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <i class="ri-checkbox-fill icon--gray"></i>
+      <div class="stat-body">
+        <span class="stat-label">Tâches</span>
+        <span class="stat-value">{{ statsData?.tasks ?? '—' }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card stat-card--highlight">
+      <i class="ri-money-dollar-circle-fill icon--green"></i>
+      <div class="stat-body">
+        <span class="stat-label">Montant gagné (WON)</span>
+        <span class="stat-value">{{ statsData?.wonAmount | number: '1.0-0' }} FCFA</span>
+      </div>
+    </div>
+  </div>
+</div>
