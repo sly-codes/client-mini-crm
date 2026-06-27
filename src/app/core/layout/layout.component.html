@@ -1,0 +1,39 @@
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span>Mini CRM</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" routerLinkActive="active">
+        <i class="ri-dashboard-fill"></i>
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/companies" routerLinkActive="active">
+        <i class="ri-building-fill"></i>
+        <span>Entreprises</span>
+      </a>
+      <a routerLink="/contacts" routerLinkActive="active">
+        <i class="ri-user-fill"></i>
+        <span>Contacts</span>
+      </a>
+      <a routerLink="/opportunities" routerLinkActive="active">
+        <i class="ri-bar-chart-fill"></i>
+        <span>Opportunités</span>
+      </a>
+      <a routerLink="/tasks" routerLinkActive="active">
+        <i class="ri-checkbox-fill"></i>
+        <span>Tâches</span>
+      </a>
+    </nav>
+
+    <button class="sidebar-logout" (click)="logout()">
+      <i class="ri-logout-box-fill"></i>
+      <span>Déconnexion</span>
+    </button>
+  </aside>
+
+  <main class="main-content">
+    <router-outlet />
+  </main>
+</div>

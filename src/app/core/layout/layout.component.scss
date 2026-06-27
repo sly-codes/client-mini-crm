@@ -1,0 +1,93 @@
+.app-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background-color: #18181b;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 12px;
+  gap: 8px;
+}
+
+.sidebar-brand {
+  padding: 8px 12px 20px;
+  border-bottom: 1px solid #27272a;
+  margin-bottom: 8px;
+
+  span {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 7px;
+    color: #a1a1aa;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.15s, color 0.15s;
+
+    i {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background-color: #27272a;
+      color: #fff;
+    }
+
+    &.active {
+      background-color: #3f3f46;
+      color: #fff;
+    }
+  }
+}
+
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 7px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #71717a;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  transition: background-color 0.15s, color 0.15s;
+
+  i {
+    font-size: 18px;
+  }
+
+  &:hover {
+    background-color: #27272a;
+    color: #ef4444;
+  }
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #fafaf8;
+}

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
+import { LayoutComponent } from './core/layout/layout.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { CompaniesListComponent } from './features/companies/companies-list/companies-list.component';
 import { CompanyFormComponent } from './features/companies/company-form/company-form.component';
@@ -17,69 +18,67 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'companies',
-    component: CompaniesListComponent,
+    path: '',
+    component: LayoutComponent,
     canActivate: [authGuard],
-  },
-  {
-    path: 'companies/new',
-    component: CompanyFormComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'companies/:id/edit',
-    component: CompanyFormComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'contacts',
-    component: ContactsListComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'contacts/new',
-    component: ContactsFormComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'contacts/:id/edit',
-    component: ContactsFormComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'opportunities',
-    component: OpportunitiesListComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'opportunities/new',
-    component: OpportunitiesFormComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'opportunities/:id/edit',
-    component: OpportunitiesFormComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'tasks',
-    component: TasksListComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'tasks/new',
-    component: TasksFormComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'tasks/:id/edit',
-    component: TasksFormComponent,
-    canActivate: [authGuard],
-  },
-
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [authGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'companies',
+        component: CompaniesListComponent,
+      },
+      {
+        path: 'companies/new',
+        component: CompanyFormComponent,
+      },
+      {
+        path: 'companies/:id/edit',
+        component: CompanyFormComponent,
+      },
+      {
+        path: 'contacts',
+        component: ContactsListComponent,
+      },
+      {
+        path: 'contacts/new',
+        component: ContactsFormComponent,
+      },
+      {
+        path: 'contacts/:id/edit',
+        component: ContactsFormComponent,
+      },
+      {
+        path: 'opportunities',
+        component: OpportunitiesListComponent,
+      },
+      {
+        path: 'opportunities/new',
+        component: OpportunitiesFormComponent,
+      },
+      {
+        path: 'opportunities/:id/edit',
+        component: OpportunitiesFormComponent,
+      },
+      {
+        path: 'tasks',
+        component: TasksListComponent,
+      },
+      {
+        path: 'tasks/new',
+        component: TasksFormComponent,
+      },
+      {
+        path: 'tasks/:id/edit',
+        component: TasksFormComponent,
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
+    ],
   },
 ];
